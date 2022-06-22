@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    // 检测数据类型方法
+    function getDataType(arg) {
+        // 检测变量的数据类型
+        let dataType = Object.prototype.toString.call(arg); // [object String]
+
+        let mapType = {
+            '[object Boolean]': 'boolean',
+            '[object Number]': 'number',
+            '[object String]': 'string',
+            '[object Function]': 'function',
+            '[object Array]': 'array',
+            '[object Date]': 'date',
+            '[object RegExp]': 'regExp',
+            '[object Undefined]': 'undefined',
+            '[object Null]': 'null',
+            '[object Object]': 'object'
+        }
+
+        return mapType[dataType]
+    }
+
+    class Class {
+      constructor() {
+      }
+    }
+
+    function deepCopy(p) {
+        var obj;
+        var str = getDataType(p);
+        if (str == 'array') {
+            obj = [];
+            for (var i = 0; i < p.length; i++) {
+                obj.push(arguments.callee(p[i]));
+            }
+        } else if (str == 'object') {
+            obj = {};
+            for (var i in p) {
+                obj[i] = arguments.callee(p[i]);
+            }
+        } else {
+            return p;
+        }
+        return obj;
+    }
+    var array = ["vue", 1, undefined, true, null, function test(){}, {age : 1}, ["html","css"]]
+    var data = deepCopy(array)
+    data[6].age = 100
+    data[7][0] = "git"
+    console.log("old",array)
+    console.log("new", data)
+
+
+    // 深拷贝数组1
+    // let array = ["vue", "javascript", "html"]
+    // let newArray = JSON.parse(JSON.stringify(array))
+    // newArray[0] = "123"
+    // console.log("old array", array)
+    // console.log("new array", newArray)
+
+
+    // 深拷贝数组2   核心： 将原数组的内容放到一个新数组里面， 并且新数组的内容发生改变并不会影响原数组
+    // let array1 = ["vue", "javascript", "html", function test(){}]
+    // /*
+    //     // bad 错误的 无法拷贝函数
+    //     let newArray1 = JSON.parse(JSON.stringify(array))
+    //     console.log("old array1", array1)
+    //     console.log("new array1", newArray1)
+    // */
+    // let newArray1 = []
+    // for(let i =0; i< array1.length; i++){
+    //     newArray1.push(array1[i])
+    // }
+    // console.log("old array1", array1)
+    // console.log("new array1", newArray1)
+
+
+    // 深拷贝数组3
+    // let array2 = ["vue",1,undefined, true, null, function test1(){}, {age : 1}, ["hello", "vue"]]
+    // let newArray2 = []
+    // for(let i =0; i< array2.length; i++){
+    //     newArray2.push(array2[i])
+    //     // 检测数据类型 typeof  instanceof  constract Array.isArray Object.prototype.toString.call()
+    //     if(getDataType(array2[i]) === 'object'){
+    //         let newObject = {}
+    //         for(let key in array2[i]){
+    //             newObject[key] =  array2[i][key]
+    //         }
+    //     }
+    // }
+    // newArray2[6].age = 100
+    // newArray2[7][0] = "world"
+    //
+    // console.log("old array2", array2)
+    // console.log("new array2", newArray2)
+
+
+
+
+
+    // 深拷贝对象
+
+    // 深拷贝方式1  Object.assign 注意： 前提是对象只能有一层
+    // let obj = {name : "jack", age : 100}
+    // let newObj = {}
+    // Object.assign(newObj,obj)
+    // newObj.name = "rose"
+    // console.log("old obj", obj)
+    // console.log("new obj", newObj)
+
+    // 深拷贝方式2
+    // let obj1 = {name : "jack", age : 100}
+    // let newObj1 = JSON.parse(JSON.stringify(obj1))
+    // newObj1.name = "rose"
+    // console.log("old obj1", obj1)
+    // console.log("new obj1", newObj1)
+
+    // 深拷贝方式3
+    // let obj2 = {name : "jack", age : 100, test : {love : "music" , dataType : {num : 1000}}}
+    // let newObj2 = JSON.parse(JSON.stringify(obj2))
+    // newObj2.name = "rose"
+    // newObj2.test.love = "sport"
+    // newObj2.test.dataType.num = 0
+    // console.log("old obj2", obj2)
+    // console.log("new obj2", newObj2)
+
+
+    // 基本数据类型 对象 数组
+
+
+
+
+
+    // 检测数据类型方式
+    // let a = {name : "!23"}
+    // let a = "123"
+    // console.log(Object.prototype.toString.call(a))
+
+    // if(a === "[object String]")
+    // [object String]  : "string"
+    // [object Function] : "function"
+    // [object Array] : "array"
+    // [object Object]
+
+
+
+</script>

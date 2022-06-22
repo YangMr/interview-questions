@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 数组浅拷贝 //特点： 共享同一内存    指针指向同一地址
+    let array = ["vue", "javascript", "react"]
+    let newArray = array
+    newArray[0] = "123"
+    console.log("原数组", array)
+    console.log("新数组", newArray)
+
+    // 对象浅拷贝
+    let obj = {name : "jack", age : 20}
+    let newObj = obj
+    newObj.age = 100
+    console.log("old obj" , obj)
+    console.log("new obj" , newObj)
+
+    // Object.assgin() 如果对象的数据只有一层的时候， 使用 Object.assgin() 可以实现深拷贝 ， 如果对象的数据有多层的时候，
+    // 那么Object.assgin()方法在拷贝对象里面深层数据的时候，只能进行浅拷贝
+    let obj1 = {name : "rose", age : 100 , test : {love : "music"}}
+    let newObj1 = {}
+    Object.assign(newObj1,obj1)
+    newObj1.name = "jack"
+    newObj1.age = 29
+    newObj1.test.love = "sport"
+    console.log("old obj1", obj1)
+    console.log("new newObj1", newObj1)
+
+
+
+
+</script>
